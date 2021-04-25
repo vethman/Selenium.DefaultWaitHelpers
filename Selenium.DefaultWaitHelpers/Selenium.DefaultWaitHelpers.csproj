@@ -6,7 +6,7 @@
     <Company>Betabit</Company>
     <Product>Selenium.DefaultWaitHelpers</Product>
     <Description>Helper to make it easier to wait for element(states). ExpectedConditions that work for WebDriver and WebElement.</Description>
-    <PackageProjectUrl>https://github.com/vethman/Selenium.DefaultWaitHelpers</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/vethman/Selenium.DefaultWaitHelpers/tree/main/Selenium.DefaultWaitHelpers</PackageProjectUrl>
     <PackageTags>Selenium, Wait, ExpectedConditions</PackageTags>
     <RepositoryUrl>https://github.com/vethman/Selenium.DefaultWaitHelpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
