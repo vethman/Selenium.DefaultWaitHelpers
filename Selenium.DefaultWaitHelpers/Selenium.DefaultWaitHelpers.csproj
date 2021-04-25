@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;netstandard2.0;net46</TargetFrameworks>
+    <Authors>Ronald Veth</Authors>
+    <Company>Betabit</Company>
+    <Product>Selenium.DefaultWaitHelpers</Product>
+    <Description>Helper to make it easier to wait for element(states). ExpectedConditions that work for WebDriver and WebElement.</Description>
+    <PackageProjectUrl>https://github.com/vethman/Selenium.DefaultWaitHelpers</PackageProjectUrl>
+    <PackageTags>Selenium, Wait, ExpectedConditions</PackageTags>
+    <RepositoryUrl>https://github.com/vethman/Selenium.DefaultWaitHelpers</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+  </ItemGroup>
+
+</Project>
