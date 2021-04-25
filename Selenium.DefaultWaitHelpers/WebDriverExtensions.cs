@@ -29,24 +29,33 @@ namespace Selenium.DefaultWaitHelpers
 
         public static IWebElement FindElement(this IWebDriver webDriver, By by, WaitForElement waitForElement)
         {
-            return waitForElement switch
+            switch (waitForElement)
             {
-                WaitForElement.None => webDriver.FindElement(by),
-                WaitForElement.Visible => webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementIsVisible(by)),
-                WaitForElement.Clickable => webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementToBeClickable(by)),
-                WaitForElement.Exists => webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementExists(by)),
-                _ => throw new ArgumentException($"WaitForElement {waitForElement} is not implemented")
+                case WaitForElement.None:
+                    return webDriver.FindElement(by);
+                case WaitForElement.Visible:
+                    return webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementIsVisible(by));
+                case WaitForElement.Clickable:
+                    return webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementToBeClickable(by));
+                case WaitForElement.Exists:
+                    return webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementExists(by));
+                default:
+                    throw new ArgumentException($"WaitForElement {waitForElement} is not implemented");
             };
         }
 
         public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver webDriver, By by, WaitForElements waitForElements)
         {
-            return waitForElements switch
+            switch(waitForElements)
             {
-                WaitForElements.None => webDriver.FindElements(by),
-                WaitForElements.Visible => webDriver.WaitUntil(ExpectedConditionsSearchContext.VisibilityOfAllElementsLocatedBy(by)),
-                WaitForElements.Exists => webDriver.WaitUntil(ExpectedConditionsSearchContext.PresenceOfAllElementsLocatedBy(by)),
-                _ => throw new ArgumentException($"WaitForElements {waitForElements} is not implemented")
+                case WaitForElements.None:
+                    return webDriver.FindElements(by);
+                case WaitForElements.Visible:
+                    return webDriver.WaitUntil(ExpectedConditionsSearchContext.VisibilityOfAllElementsLocatedBy(by));
+                case WaitForElements.Exists:
+                    return webDriver.WaitUntil(ExpectedConditionsSearchContext.PresenceOfAllElementsLocatedBy(by));
+                default:
+                    throw new ArgumentException($"WaitForElements {waitForElements} is not implemented");
             };
         }
     }
