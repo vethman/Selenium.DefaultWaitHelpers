@@ -22,11 +22,7 @@ namespace Selenium.DefaultWaitHelpers
 
         public static T WaitUntil<T>(this IWebElement webElement, Func<IWebElement, T> condition, TimeSpan timeout, TimeSpan pollingInterval, params Type[] ignoreExceptionTypes)
         {
-            var wait = new DefaultWait<IWebElement>(webElement, new SystemClock())
-            {
-                Timeout = timeout,
-                PollingInterval = pollingInterval
-            };
+            var wait = new WebElementWait(new SystemClock(), webElement, timeout, pollingInterval);
             wait.IgnoreExceptionTypes(ignoreExceptionTypes);
             return wait.Until(condition);
         }
