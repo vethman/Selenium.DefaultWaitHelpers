@@ -6,6 +6,10 @@
     public enum WaitForElement
     {
         /// <summary>
+        /// No ExpectedConditionsSearchContext, use default FindElement
+        /// </summary>
+        None,
+        /// <summary>
         /// ExpectedConditionsSearchContext ElementIsVisible
         /// </summary>
         Visible,

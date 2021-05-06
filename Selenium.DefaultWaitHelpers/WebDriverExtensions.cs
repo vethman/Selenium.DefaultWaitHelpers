@@ -92,6 +92,8 @@ namespace Selenium.DefaultWaitHelpers
         {
             switch (waitForElement)
             {
+                case WaitForElement.None:
+                    return webDriver.FindElement(by);
                 case WaitForElement.Visible:
                     return webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementIsVisible(by));
                 case WaitForElement.Clickable:
@@ -115,6 +117,8 @@ namespace Selenium.DefaultWaitHelpers
         {
             switch(waitForElements)
             {
+                case WaitForElements.None:
+                    return webDriver.FindElements(by);
                 case WaitForElements.Visible:
                     return webDriver.WaitUntil(ExpectedConditionsSearchContext.VisibilityOfAllElementsLocatedBy(by));
                 case WaitForElements.Exists:
