@@ -4,6 +4,15 @@ using System.Text.RegularExpressions;
 
 namespace Selenium.DefaultWaitHelpers
 {
+    /// <summary>
+    /// Supplies a set of common conditions that can be waited for using.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// IWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+    /// IWebElement element = wait.Until(ExpectedConditions.ElementExists(By.Id("foo")));
+    /// </code>
+    /// </example>
     public sealed class ExpectedConditionsWebDriver
     {
         /// <summary>
