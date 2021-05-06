@@ -10,8 +10,8 @@
     <PackageTags>Selenium, Wait, ExpectedConditions</PackageTags>
     <RepositoryUrl>https://github.com/vethman/Selenium.DefaultWaitHelpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>Added new ExpectedConditionsSearchContext ElementContainsClass. Documented code with XML comments. Added DocumentationFile to Nuget Package</PackageReleaseNotes>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Added new ExpectedConditionsSearchContext ElementNotContainsClass</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -458,7 +458,7 @@ namespace Selenium.DefaultWaitHelpers
         /// </summary>
         /// <param name="locator">The locator used to find the element.</param>
         /// <param name="className">expectation of class to be in element</param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> given element is in correct state.; otherwise, <see langword="false"/>.</returns>
         public static Func<ISearchContext, IWebElement> ElementContainsClass(By locator, string className)
         {
             return (searchContext) =>
@@ -476,7 +476,7 @@ namespace Selenium.DefaultWaitHelpers
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="className">expectation of class to be in element</param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> given element is in correct state.; otherwise, <see langword="false"/>.</returns>
         public static Func<ISearchContext, IWebElement> ElementContainsClass(IWebElement element, string className)
         {
             return (searchContext) =>
@@ -487,6 +487,48 @@ namespace Selenium.DefaultWaitHelpers
                         .Matches(element.GetAttribute("class"))
                         .Cast<Match>()
                         .Any(x => x.Groups[0].Value == className) ? element : null;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
+        }
+
+        /// <summary>
+        /// An expectation for checking if the given element not contains expected class.
+        /// </summary>
+        /// <param name="locator">The locator used to find the element.</param>
+        /// <param name="className">expectation of class not to be in element</param>
+        /// <returns><see langword="true"/> given element is in correct state.; otherwise, <see langword="false"/>.</returns>
+        public static Func<ISearchContext, IWebElement> ElementNotContainsClass(By locator, string className)
+        {
+            return (searchContext) =>
+            {
+                var element = searchContext.FindElement(locator);
+                return ClassNameRegex
+                    .Matches(element.GetAttribute("class"))
+                    .Cast<Match>()
+                    .Any(x => x.Groups[0].Value != className) ? element : null;
+            };
+        }
+
+        /// <summary>
+        /// An expectation for checking if the given element not contains expected class.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="className">expectation of class not to be in element</param>
+        /// <returns><see langword="true"/> given element is in correct state.; otherwise, <see langword="false"/>.</returns>
+        public static Func<ISearchContext, IWebElement> ElementNotContainsClass(IWebElement element, string className)
+        {
+            return (searchContext) =>
+            {
+                try
+                {
+                    return ClassNameRegex
+                        .Matches(element.GetAttribute("class"))
+                        .Cast<Match>()
+                        .Any(x => x.Groups[0].Value != className) ? element : null;
                 }
                 catch (StaleElementReferenceException)
                 {
