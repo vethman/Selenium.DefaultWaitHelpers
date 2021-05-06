@@ -2,11 +2,23 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Selenium.DefaultWaitHelpers
 {
+    /// <summary>
+    /// Supplies a set of common conditions that can be waited for using.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// IWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+    /// IWebElement element = wait.Until(ExpectedConditions.ElementExists(By.Id("foo")));
+    /// </code>
+    /// </example>
     public sealed class ExpectedConditionsSearchContext
     {
+        private static readonly Regex ClassNameRegex = new Regex("[_a-zA-Z0-9-]+", RegexOptions.Compiled);
+
         /// <summary>
         /// Prevents a default instance of the <see cref="ExpectedConditionsSearchContext"/> class from being created.
         /// </summary>
@@ -437,6 +449,48 @@ namespace Selenium.DefaultWaitHelpers
                 catch (StaleElementReferenceException)
                 {
                     return false;
+                }
+            };
+        }
+
+        /// <summary>
+        /// An expectation for checking if the given element contains expected class.
+        /// </summary>
+        /// <param name="locator">The locator used to find the element.</param>
+        /// <param name="className">expectation of class to be in element</param>
+        /// <returns></returns>
+        public static Func<ISearchContext, IWebElement> ElementContainsClass(By locator, string className)
+        {
+            return (searchContext) =>
+            {
+                var element = searchContext.FindElement(locator);
+                return ClassNameRegex
+                    .Matches(element.GetAttribute("class"))
+                    .Cast<Match>()
+                    .Any(x => x.Groups[0].Value == className) ? element : null;
+            };
+        }
+
+        /// <summary>
+        /// An expectation for checking if the given element contains expected class.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="className">expectation of class to be in element</param>
+        /// <returns></returns>
+        public static Func<ISearchContext, IWebElement> ElementContainsClass(IWebElement element, string className)
+        {
+            return (searchContext) =>
+            {
+                try
+                {
+                    return ClassNameRegex
+                        .Matches(element.GetAttribute("class"))
+                        .Cast<Match>()
+                        .Any(x => x.Groups[0].Value == className) ? element : null;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
                 }
             };
         }

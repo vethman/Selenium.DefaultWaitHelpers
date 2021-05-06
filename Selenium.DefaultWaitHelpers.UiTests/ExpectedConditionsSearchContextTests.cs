@@ -218,6 +218,100 @@ namespace Selenium.DefaultWaitHelpers.UiTests
                 .Should().Throw<WebDriverTimeoutException>();
         }
 
+        [Test]
+        public void ISearchContext_WebDriver_ElementContainsClass_ByLocator_Success()
+        {
+            OpenDemoHtml("spinner");
+
+            FluentActions.Invoking(() =>
+                _webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(By.Id("classchanger"), "loadedclass")))
+                .Should().NotThrow();
+        }
+
+        [Test]
+        public void ISearchContext_WebElement_ElementContainsClass_ByLocator_Success()
+        {
+            OpenDemoHtml("spinner");
+
+            var parentElement = _webDriver.FindElement(By.TagName("body"));
+
+            FluentActions.Invoking(() =>
+                parentElement.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(By.Id("classchanger"), "loadedclass")))
+                .Should().NotThrow();
+        }
+
+        [Test]
+        public void ISearchContext_WebDriver_ElementContainsClass_ByLocator_Failure()
+        {
+            OpenDemoHtml("spinner");
+
+            FluentActions.Invoking(() =>
+                _webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(By.Id("classchanger"), "loadedclass"), TimeSpan.FromMilliseconds(100)))
+                .Should().Throw<WebDriverTimeoutException>();
+        }
+
+        [Test]
+        public void ISearchContext_WebElement_ElementContainsClass_ByLocator_Failure()
+        {
+            OpenDemoHtml("spinner");
+
+            var parentElement = _webDriver.FindElement(By.TagName("body"));
+
+            FluentActions.Invoking(() =>
+                parentElement.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(By.Id("classchanger"), "loadedclass"), TimeSpan.FromMilliseconds(100)))
+                .Should().Throw<WebDriverTimeoutException>();
+        }
+
+        [Test]
+        public void ISearchContext_WebDriver_ElementContainsClass_Element_Success()
+        {
+            OpenDemoHtml("spinner");
+
+            var element = _webDriver.FindElement(By.Id("classchanger"));
+
+            FluentActions.Invoking(() =>
+                _webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(element, "loadedclass")))
+                .Should().NotThrow();
+        }
+
+        [Test]
+        public void ISearchContext_WebElement_ElementContainsClass_Element_Success()
+        {
+            OpenDemoHtml("spinner");
+
+            var parentElement = _webDriver.FindElement(By.TagName("body"));
+            var element = _webDriver.FindElement(By.Id("classchanger"));
+
+            FluentActions.Invoking(() =>
+                parentElement.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(element, "loadedclass")))
+                .Should().NotThrow();
+        }
+
+        [Test]
+        public void ISearchContext_WebDriver_ElementContainsClass_Element_Failure()
+        {
+            OpenDemoHtml("spinner");
+
+            var element = _webDriver.FindElement(By.Id("classchanger"));
+
+            FluentActions.Invoking(() =>
+                _webDriver.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(element, "loadedclass"), TimeSpan.FromMilliseconds(100)))
+                .Should().Throw<WebDriverTimeoutException>();
+        }
+
+        [Test]
+        public void ISearchContext_WebElement_ElementContainsClass_Element_Failure()
+        {
+            OpenDemoHtml("spinner");
+
+            var parentElement = _webDriver.FindElement(By.TagName("body"));
+            var element = _webDriver.FindElement(By.Id("classchanger"));
+
+            FluentActions.Invoking(() =>
+                parentElement.WaitUntil(ExpectedConditionsSearchContext.ElementContainsClass(element, "loadedclass"), TimeSpan.FromMilliseconds(100)))
+                .Should().Throw<WebDriverTimeoutException>();
+        }
+
         private void OpenDemoHtml(string demoHtml)
         {
             _webDriver.Navigate().GoToUrl(new Uri(Path.Combine(Path.GetDirectoryName(GetType().Assembly.Location), $"DemoHtml/{demoHtml}.html")).AbsoluteUri);

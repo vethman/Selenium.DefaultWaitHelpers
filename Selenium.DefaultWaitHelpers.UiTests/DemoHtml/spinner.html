@@ -115,6 +115,10 @@
         <a href="alert.html">Alert</a>
     </div>
 
+    <div id="classchanger" class="testclass">
+        <h2>This textblock will get extra classNames after spinner loaded...</h2>
+    </div>
+
     <div id="loader"></div>
 
     <div style="display:none;" id="completedMessage" class="animate-bottom">
@@ -132,6 +136,7 @@
         function showPage() {
             document.getElementById("loader").style.display = "none";
             document.getElementById("completedMessage").style.display = "block";
+            document.getElementById("classchanger").className = "testclass loadedclass extraclass";
         }
     </script>
 
