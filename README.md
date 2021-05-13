@@ -1,5 +1,5 @@
 # Selenium.DefaultWaitHelpers
-When using selenium it can be that you have to write a lot of waits. This package will help you to make things easier.
+Tired of setting up all the waits in your selenium project? This will make things easier for you.
 
 ## Original ExpectedConditions split into ExpectedConditionsSearchContext and ExpectedConditionsWebDriver
 Based on [DotNetSeleniumExtras](https://github.com/DotNetSeleniumTools/DotNetSeleniumExtras/blob/master/src/WaitHelpers/ExpectedConditions.cs)
