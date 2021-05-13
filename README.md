@@ -2,6 +2,7 @@
 When using selenium it can be that you have to write a lot of waits. This package will help you to make things easier.
 
 ## Original ExpectedConditions split into ExpectedConditionsSearchContext and ExpectedConditionsWebDriver
+Based on [DotNetSeleniumExtras](https://github.com/DotNetSeleniumTools/DotNetSeleniumExtras/blob/master/src/WaitHelpers/ExpectedConditions.cs)
 - ExpectedConditionsSearchContext contains the conditions that can be applied to both WebElement and WebDriver context
 - ExpectedConditionsWebDriver contains the conditions that can only be applied to the WebDriver context
 
